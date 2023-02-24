@@ -14,5 +14,7 @@ However, these designs were either custom gcode as a concept test or designed wi
 Once a toolchange flag is found, it copies all of the code using that 'tool', removes the flag, and copies every move using the marker, drawing right on top of the lines printed. Z offset is automatically compensated, but you may want to raise the z a little bit in the start gcode. 
 
 ## TODO: 
+- [ ] Store tools in cache
+- [ ] Allow removing tools
 - [ ] Detect relative movement mode vs normal movement mode (uncommon)
 - [ ] Testing

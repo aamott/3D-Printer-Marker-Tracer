@@ -1,6 +1,6 @@
 # 3D Printer Marker Tracer
 
-__Try it out: [3D Printer Marker Tracer](https://aamott.github.io/3D-Printer-Marker-Tracer-/marker-tracer.htm)__
+__Try it out: [3D Printer Marker Tracer](https://aamott.github.io/3D-Printer-Marker-Tracer/marker-tracer.htm)__
 
 This is a script to let a printer use markers to draw on a filament path. Useful for coating support top layers for easier removal. 
 

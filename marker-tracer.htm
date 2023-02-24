@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="marker-tracer.css">
+    <title>Marker Tracer</title>
+</head>
+<body>
+    <main>
+        <h1>3D Printer Marker Tracer</h1>
+
+        <!-- Upload File -->
+        <div>
+            <label for="gcode_upload">File to process:</label>
+            <input type="file" name="gcode_upload" id="gcode_upload" accept=".gcode">
+        </div>
+
+        <div>
+            <label for="filename" title="A nickname for the marker">New Filename</label>
+            <input type="text" name="filename" id="filename" placeholder="processed.gcode" value="processed.gcode">
+        </div>
+
+        <!-- Add Marker Form -->
+        <form action="#" onsubmit="() => {return false;}; return false;">
+            <h2>New Marker Tool</h2>
+            
+            <div>
+                <label for="marker_name" title="A nickname for the marker">Name</label>
+                <input type="text" name="marker_name" id="marker_name" value="Marker 1">
+            </div>
+
+            <div>
+                <label for="start_marker" title="Gcode that indicates the following lines should be drawn on">Toolchange Start Marker</label>
+                <input type="text" name="start_marker" id="start_marker"  placeholder="T1" required value="T1">
+            </div>
+
+            <div>
+                <label for="end_marker">Toolchange End Marker Regex</label>
+                <input type="text" name="end_marker" id="end_marker"  placeholder="^T.*" value="^T.*" required>
+            </div>
+
+            <section id="offsets">
+                <h4>Offsets:</h4>
+                <div>
+                    <label for="offset_x">X</label>
+                    <input type="number" name="offset_x" id="offset_x"  placeholder="0" value="0">
+                </div>
+
+                <div>
+                    <label for="offset_y">Y</label>
+                    <input type="number" name="offset_y" id="offset_y" placeholder="0" value="0">
+                </div>
+
+                <div>
+                    <label for="offset_z">Z</label>
+                    <input type="number" name="offset_z" id="offset_z"  placeholder="0" value="0">
+                </div>
+
+                <div>
+                    <label for="feedrate_percent" title="Percent by which feedrates should be multiplied. You may be able to set this higher or lower depending on how much ink you want on the lines.">Feedrate Percent</label>
+                    <input type="number" name="feedrate_percent" id="feedrate_percent"  placeholder="100" value="100"  title="Percent by which feedrates should be multiplied. You may be able to set this higher or lower depending on how much ink you want on the lines.">%
+                </div>
+                
+            </section>
+
+            <div class="textbox">
+                <label for="start_gcode">Start Gcode</label>
+                <textarea name="start_gcode" id="start_gcode" cols="40" rows="7" placeholder="; Pick up marker
+G0 X0 Y0
+...">G0 X0 Y0</textarea>
+            </div>
+
+            <div class="textbox">
+                <label for="end_gcode">End Gcode</label>
+                <textarea name="end_gcode" id="end_gcode" cols="40" rows="7" placeholder="; Return marker
+G0 X222 Y222
+...">G0 X222 Y222</textarea>
+            </div>
+
+            <div>
+                <label for="no_temp_changes" title="Sometimes slicers (like Cura) can insert a lot of annoying temperature changes you didn't want when you do a toolchange. This will delete all of those.">Disable Temperature Changes:</label>
+                <input type="checkbox" name="no_temp_changes" id="no_temp_changes" title="Sometimes slicers (like Cura) can insert a lot of annoying temperature changes you didn't want when you do a toolchange. This will delete all of those.">
+            </div>
+
+            <button id="add_marker" value="Add Marker" title="Add another marker 'tool'">Add Marker</button>
+            <input type="submit" value="" hidden>
+        </form>
+
+        <!-- Process and Download -->
+        <button id="process_gcode" disabled>Process</button>
+
+        <button id="download_btn" disabled>Download</button>
+
+        <div id="marker_tools">
+            <h3>Marker Tools</h3>
+            <!-- <section>
+                <p>- Green Marker</p>
+            </section> -->
+        </div>
+
+    </main>
+    <script src="marker-tracer-script.js"></script>
+</body>
+</html>

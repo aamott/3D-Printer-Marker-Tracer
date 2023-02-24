@@ -1,0 +1,46 @@
+* {
+    box-sizing: border-box;
+}
+
+form {
+    margin: 30px 0;
+    max-width: 700px;
+    border: solid gray 2px;
+    border-radius: 10px;
+    padding: 10px
+}
+form>div {
+    display: flex;
+    flex-direction: row;
+    margin: 10px;
+}
+form>div>label {
+    padding-right: 10px;
+}
+
+form>section {
+    margin: 10px;
+}
+form>section>h4 {
+    margin-bottom: 6px;
+}
+form>section>div {
+    display: block;
+    margin: 5px;
+}
+
+form .textbox {
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    width: 50%;
+    max-width: 400px;
+
+    margin-top: 20px;
+}
+form .textbox>label {
+
+}
+form .textbox {
+    height: 130px;
+}

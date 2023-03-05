@@ -37,8 +37,13 @@
             </div>
 
             <div>
-                <label for="end_marker">Toolchange End Marker Regex</label>
-                <input type="text" name="end_marker" id="end_marker"  placeholder="^T-1" value="^T-1" required>
+                <label for="end_marker" title="^T(-?)[0-9]* will match Tx toolchanges. For example, 'T0', 'T15', or 'T-1'">Toolchange End Marker Regex</label>
+                <input type="text" name="end_marker" id="end_marker"  placeholder="^T(-?)[0-9]*" value="^T(-?)[0-9]*" required>
+            </div>
+
+            <div>
+                <input type="checkbox" name="start_marker_is_end" id="start_marker_is_end" title="Checks to see if the end marker is also a start marker for another marker."  checked>
+                <label for="start_marker_is_end" title="Checks to see if the end marker is also a start marker for another marker.">End marker can be start</label>
             </div>
 
             <section id="offsets">
@@ -80,8 +85,8 @@ G0 X222 Y222
             </div>
 
             <div>
-                <label for="no_temp_changes" title="Sometimes slicers (like Cura) can insert a lot of annoying temperature changes you didn't want when you do a toolchange. This will delete all of those.">Disable Temperature Changes:</label>
                 <input type="checkbox" name="no_temp_changes" id="no_temp_changes" title="Sometimes slicers (like Cura) can insert a lot of annoying temperature changes you didn't want when you do a toolchange. This will delete all of those.">
+                <label for="no_temp_changes" title="Sometimes slicers (like Cura) can insert a lot of annoying temperature changes you didn't want when you do a toolchange. This will delete all of those.">Disable temperature changes while tracing</label>
             </div>
 
             <button id="add_marker" value="Add Marker" title="Add another marker 'tool'">Add Marker</button>

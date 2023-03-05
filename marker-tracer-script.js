@@ -117,6 +117,34 @@ document.getElementById( 'gcode_upload' ).addEventListener( "change", function (
 } );
 
 
+/***************************************
+ * Check Marker
+ */
+const check_markers = (line) => {
+    let selected_marker = null;
+
+    for ( marker of marker_tools ) {
+        if ( line.startsWith( marker.start_marker ) ) {
+            // marker matched!
+            selected_marker = marker;
+
+            // clear out the old tool_gcode and load the marker
+            tool_new_gcode = marker.start_gcode + '\n';
+
+            // add Z offset
+            tool_new_gcode += `G91 ; relative positioning
+G0 Z${selected_marker.offsets.z}
+G90 ; absolute positioning`
+
+            skip_loop = true;
+            break;
+        }
+    }
+
+    return selected_marker;
+}
+
+
 /********************
  * Process Gcode
  */
@@ -149,25 +177,10 @@ document.getElementById( "process_gcode" ).addEventListener( 'click', () => {
         // check if any of the markers match
         let skip_loop = false;
         if ( !selected_marker ) {
-            for ( marker of marker_tools ) {
-                if ( line.startsWith( marker.start_marker ) ) {
-                    // marker matched!
-                    selected_marker = marker;
-                    // clear out the old tool_gcode and load the marker
-                    tool_new_gcode = marker.start_gcode + '\n';
+            selected_marker = check_markers(line);
 
-                    // add Z offset
-                    tool_new_gcode += `G91 ; relative positioning
-G0 Z${selected_marker.offsets.z}
-G90 ; absolute positioning`
-
-                    skip_loop = true;
-                    break;
-                }
-            }
-
-            // Remove the start_marker line from the file
-            if ( skip_loop ) {
+            // Remove the start_marker line from the file if a marker was added
+            if ( selected_marker ) {
                 continue;
             }
         }
@@ -187,6 +200,14 @@ G0 Z${-selected_marker.offsets.z}
 G90 ; absolute positioning`
                 
                 selected_marker = null;
+
+                // TODO: Test keep end marker
+                // add the end marker back in, if selected
+                if (document.getElementById('start_marker_is_end').checked) {
+                    // check if the end flag is the start flag of another marker
+                    selected_marker = check_markers(line);
+                }
+
 
                 // move to the next line
                 continue;
